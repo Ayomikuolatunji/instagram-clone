@@ -46,7 +46,9 @@ export default function Upload() {
               imageUrl:url,
               caption: captionText,
             });
-            postsData()
+            if(docRef.id){
+              postsData()
+            }
             setOpen(false)
             console.log("Document written with ID: ", docRef.id);
           } catch (e) {
