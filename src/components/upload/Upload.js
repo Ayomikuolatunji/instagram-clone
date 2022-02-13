@@ -97,7 +97,7 @@ export default function Upload() {
     >
       <Box sx={style}>
       <form action="" className='flex flex-col'>
-        <Input 
+          <Input 
              placeholder="enter post caption"
              type="caption"
              value={caption}
