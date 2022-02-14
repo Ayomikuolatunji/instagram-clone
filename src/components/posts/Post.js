@@ -3,8 +3,10 @@ import "./posts.css";
 import Avatar from "@material-ui/core/Avatar"
 import { collection, getDocs,addDoc,getFirestore } from "firebase/firestore";  
 import {FireBaseApi} from "../contextApi/ContextApi";
-import Comments from "../comments/Comments"
-import Comment from "../comments/Comment"
+import Comments from "../comments/Comments";
+import {BsThreeDots} from "react-icons/all"
+import Comment from "../comments/Comment";
+
 
 
 const db = getFirestore();
@@ -44,13 +46,16 @@ export default function Post({username,caption, imageUrl,id}){
     return(
         <div  className="posts">
              {/* header avatar--->*/}
-             <div className="post_header">
-               <Avatar 
-                className="post_avatar"
-                alt={username}
-                src="/static/images/avatar/1.jpg" 
-                />
-               <h3>{username}</h3>
+             <div className="post_header flex justify-between">
+               <div className="post_header flex justify-between items-center">
+                <Avatar 
+                  className="post_avatar"
+                  alt={username}
+                  src="/static/images/avatar/1.jpg" 
+                  />
+                <h3>{username}</h3>
+               </div>
+               <BsThreeDots/>
              </div>
             {/* image */}
                <img src={imageUrl}  alt="image_tag" className="post_img"/>

@@ -20,7 +20,7 @@
 .post_header{
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 5px;
 }
 .post_avatar{
     margin-right: 4px;
