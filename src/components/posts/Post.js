@@ -11,16 +11,16 @@ const db = getFirestore();
 export default function Post({username,caption, imageUrl,id}){
     const [comments,setcomments]=React.useState(false);
     const  [comment,setcomment]=React.useState("");
-    const {postsData}=React.useContext(FireBaseApi)
-
+    const {postsData}=React.useContext(FireBaseApi);
+    
+    const postData=async()=>{
+      const query =collection(db,"posts",id,"comments")
+      const res=await getDocs(query)
+      setcomments(res.docs.map(doc=>doc.data()))
+     }
      useEffect(()=>{
-        const postsData=async()=>{
-          const query =collection(db,"posts",id,"comments")
-          const res=await getDocs(query)
-          setcomments(res.docs.map(doc=>doc.data()))
-         }
-       postsData()
-     },[id]);
+       postData()
+     });
      const postComments=async(e)=>{
       if(!comment){
         console.log("error")
@@ -28,11 +28,12 @@ export default function Post({username,caption, imageUrl,id}){
       }
       try {
         const docRef = await addDoc(collection(db,"posts",id,"comments"), {
-          username: username,
+          username: localStorage.getItem("username"),
           text:comment,
         });
         if(docRef.id){
           postsData()
+          postData()
         }
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {

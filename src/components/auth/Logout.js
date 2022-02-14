@@ -8,7 +8,10 @@ export default function Logout(){
 
     const logoutBtn=()=>auth.signOut()
     return(
-        <Button onClick={()=>logoutBtn()}>
+        <Button onClick={()=>{
+            logoutBtn()
+            localStorage.removeItem("username")
+            }}>
            Logout
         </Button>
     )

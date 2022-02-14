@@ -5,7 +5,8 @@ import {FireBaseApi} from "../contextApi/ContextApi";
 import { addDoc, collection,getFirestore } from "firebase/firestore";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import LinearWithValueLabel from "../utility/Utility"
+import LinearWithValueLabel from "../utility/Utility";
+import {GoDiffAdded} from "react-icons/all"
 
 
 const db = getFirestore();
@@ -119,7 +120,7 @@ export default function Upload() {
       </Box>
 
   </Modal>
-  <Button onClick={handleOpen}>Add post</Button>
+  <Button onClick={handleOpen}><GoDiffAdded/></Button>
      
   </div>;
 }
