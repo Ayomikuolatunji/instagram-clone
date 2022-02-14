@@ -6,7 +6,8 @@ import { addDoc, collection,getFirestore } from "firebase/firestore";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import LinearWithValueLabel from "../utility/Utility";
-import {GoDiffAdded} from "react-icons/all"
+import {GrAddCircle} from "react-icons/all";
+import uploadimg from "../../cloud-upload-outline.png"
 
 
 const db = getFirestore();
@@ -34,7 +35,7 @@ export default function Upload() {
       transform: 'translate(-50%, -50%)',
       width: 400,
       bgcolor: 'background.paper',
-      border: '2px solid #000',
+      border: '1px solid gray',
       boxShadow: 24,
       p: 4,
     };
@@ -49,8 +50,8 @@ export default function Upload() {
             });
             if(docRef.id){
               postsData()
+              handleClose()
             }
-            setOpen(false)
             console.log("Document written with ID: ", docRef.id);
           } catch (e) {
             console.error("Error adding document: ", e);
@@ -98,29 +99,44 @@ export default function Upload() {
      open={open}
      onClose={handleClose}
     >
-      <Box sx={style}>
-      <form action="" className='flex flex-col'>
-          <Input 
-             placeholder="enter post caption"
-             type="caption"
-             value={caption}
-             onChange={(e)=>setcaption(e.target.value)}
-           />
-           {progress ? <LinearWithValueLabel progress={progress}/> : ""}
-           <Input 
-             placeholder="setPassword"
-             type="file"
-             onChange={(e)=>handleFile(e)}
-             className="w-1/2"
-           />
-           <Button onClick={handleUpload}>
-               Upload post
-           </Button>
+      <Box sx={style} className="rounded-xl">
+           <div className="absolute top-0 right-0 left-0 text-center p-3 border-b-2 border-gray-300">
+               <h1 className='text-gray-600 font-extrabold'>Create new post</h1>
+             </div>
+            <form action="" className='flex flex-col relative mt-5'>
+             <div className='w-full mt-4'>
+              <Input 
+              placeholder="Enter post caption"
+              type="caption"
+              value={caption}
+              onChange={(e)=>setcaption(e.target.value)}
+              className="border-1 w-full text-center p-3"
+              />
+            </div>
+             <span>{progress ? <LinearWithValueLabel progress={progress}/> : ""}</span>
+             <div className='w-full mt-5'>
+               <label htmlFor="file"  className='block  p-3 text-center rounded-md w-1/2 mx-auto relative'>
+                  <img src={uploadimg} alt="" />
+                  <span className='absolute top-1/5 right-1/3 text-black font-extrabold'>{file.name}</span>
+                  <input 
+                    placeholder="setPassword"
+                    type="file"
+                    onChange={(e)=>handleFile(e)}
+                    className="border-1 w-full text-center mt-4 hidden"
+                    id='file'
+                  />
+               </label>
+             </div>
+             <div className='w-full mt-5'>
+             <button onClick={handleUpload} className='block bg-purple-500 p-3 text-center rounded-md mx-auto text-gray-800 font-extrabold'>
+                Upload post
+              </button>
+             </div>
       </form>
       </Box>
 
   </Modal>
-  <Button onClick={handleOpen}><GoDiffAdded/></Button>
+  <Button onClick={handleOpen}><GrAddCircle className='text-2xl'/></Button>
      
   </div>;
 }

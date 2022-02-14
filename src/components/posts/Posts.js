@@ -5,7 +5,7 @@ import InstagramEmbed from 'react-instagram-embed';
 
 export default function Posts() {
     const {posts,id} =React.useContext(FireBaseApi)
-  return <div className='flex justify-center'>
+  return <div className='flex justify-center flex-wrap'>
       <div className='mr-5'>
       {
       posts &&  posts.map((post,index)=>{

@@ -7,9 +7,10 @@
 }
 .app_header{
     object-fit: contain;
-    padding: 20px;
+    padding: 10px;
     background-color: white;
     position: sticky;
+    z-index: 99;
     top: 0;
     border-bottom: 1px solid lightgray;
 }
