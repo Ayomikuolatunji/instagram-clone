@@ -2,9 +2,9 @@ import React,{useEffect} from  "react";
 import "./posts.css";
 import Avatar from "@material-ui/core/Avatar"
 import { collection, getDocs,addDoc,getFirestore } from "firebase/firestore";  
-import Input from '@mui/material/Input';
-import Button from '@mui/material/Button';
 import {FireBaseApi} from "../contextApi/ContextApi";
+import Comments from "../comments/Comments"
+import Comment from "../comments/Comment"
 
 
 const db = getFirestore();
@@ -12,14 +12,15 @@ export default function Post({username,caption, imageUrl,id}){
     const [comments,setcomments]=React.useState(false);
     const  [comment,setcomment]=React.useState("");
     const {postsData}=React.useContext(FireBaseApi);
-    
-    const postData=async()=>{
+     
+    // get all comment using posts id
+    const fetchComments=async()=>{
       const query =collection(db,"posts",id,"comments")
       const res=await getDocs(query)
       setcomments(res.docs.map(doc=>doc.data()))
      }
      useEffect(()=>{
-       postData()
+       fetchComments()
      });
      const postComments=async(e)=>{
       if(!comment){
@@ -33,7 +34,7 @@ export default function Post({username,caption, imageUrl,id}){
         });
         if(docRef.id){
           postsData()
-          postData()
+          fetchComments()
         }
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
@@ -58,22 +59,11 @@ export default function Post({username,caption, imageUrl,id}){
             <div className="border-2">
               {comments ? comments.map((comment,index)=>{
                 return <div key={index}>
-                    <h1>{comment.username}</h1>
-                   <h2>{comment.text}</h2>
+                    <Comments {...comment} imageUrl={imageUrl}/>
                 </div>
               }):null}
             </div>
-            <form action="">
-            <Input 
-             placeholder="add a comment"
-             type="caption"
-             value={comment}
-             onChange={(e)=>setcomment(e.target.value)}
-            />
-              <Button onClick={postComments}>
-               Upload post
-              </Button>
-            </form>
+            <Comment setcomment={setcomment} postComments={postComments} comment={comment}/>
         </div>
     )
 }

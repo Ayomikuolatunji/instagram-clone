@@ -50,9 +50,9 @@ export default function Upload() {
             });
             if(docRef.id){
               postsData()
-              handleClose()
             }
             console.log("Document written with ID: ", docRef.id);
+            setOpen(false)
           } catch (e) {
             console.error("Error adding document: ", e);
           }
@@ -103,7 +103,7 @@ export default function Upload() {
            <div className="absolute top-0 right-0 left-0 text-center p-3 border-b-2 border-gray-300">
                <h1 className='text-gray-600 font-extrabold'>Create new post</h1>
              </div>
-            <form action="" className='flex flex-col relative mt-5'>
+            <div className='flex flex-col relative mt-5'>
              <div className='w-full mt-4'>
               <Input 
               placeholder="Enter post caption"
@@ -132,7 +132,7 @@ export default function Upload() {
                 Upload post
               </button>
              </div>
-      </form>
+      </div>
       </Box>
 
   </Modal>

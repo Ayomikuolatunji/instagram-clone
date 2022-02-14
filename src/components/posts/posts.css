@@ -1,7 +1,7 @@
 .posts{
    max-width: 500px;
    background-color: #fff;
-   margin: auto auto 45px auto;
+   margin: auto auto 30px auto;
    border:1px solid lightgray;
 }
 
@@ -20,8 +20,9 @@
 .post_header{
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
 }
 .post_avatar{
-    margin-right: 10px;
+    margin-right: 4px;
+    padding: 4px;
 }
