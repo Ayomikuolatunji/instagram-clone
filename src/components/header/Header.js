@@ -18,7 +18,7 @@ export default function Header(){
             
             <div className="flex items-center">
             <FaHome className="text-3xl"/>
-            {user && <button className="ml-5"><i class="fab fa-facebook-messenger text-2xl"></i></button>}
+            {user && <button className="ml-5"><i className="fab fa-facebook-messenger text-2xl"></i></button>}
             {user && <Upload/>}
             {user && <GiEternalLove className="text-3xl"/>}
             {

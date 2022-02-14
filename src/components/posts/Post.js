@@ -12,6 +12,7 @@ import Comment from "../comments/Comment";
 const db = getFirestore();
 export default function Post({username,caption, imageUrl,id}){
     const [comments,setcomments]=React.useState(false);
+    // const [more,setmore]=React.useState(false)
     const  [comment,setcomment]=React.useState("");
     const {postsData}=React.useContext(FireBaseApi);
      
@@ -43,6 +44,7 @@ export default function Post({username,caption, imageUrl,id}){
         console.error("Error adding document: ", e);
       }
      }
+    // console.log(comments.length>1 && comments.slice(0,1))
     return(
         <div  className="posts">
              {/* header avatar--->*/}

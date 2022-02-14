@@ -6,7 +6,7 @@ import Rightpost from "../rigthpost/Rightpost"
 export default function Posts() {
     const {posts,id} =React.useContext(FireBaseApi)
   return <div className='flex justify-center flex-wrap'>
-      <div className='mr-5'>
+      <div className='sm:mr-5'>
           {
           posts &&  posts.map((post,index)=>{
           const {username,imageUrl,caption}=post

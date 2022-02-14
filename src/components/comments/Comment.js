@@ -20,7 +20,7 @@ export default function Comment({setcomment,comment,postComments}){
                 />
              </div>
               <div className="">
-                  <span className="text-green-200 cursor-pointer">Post</span>
+                  <span className="text-green-200 cursor-pointer" onClick={postComments}>Post</span>
               </div>
         </div>
     )
