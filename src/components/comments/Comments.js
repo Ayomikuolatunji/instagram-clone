@@ -1,21 +1,15 @@
 import React from "react";
-import Avatar from "@material-ui/core/Avatar"
 
-export default function comments({username,text,imageUrl}){
+
+export default function comments({username,text}){
 
 
     return(
         <div>
-             <div className="post_header">
-               <Avatar 
-                className="post_avatar"
-                alt={username}
-                src="/static/images/avatar/1.jpg" 
-                />
-               <h3>{username}</h3>
+             <div className="post_header  flex">
              </div>
             <h1>{username}</h1>
-            <h2>{text}</h2>
+            <h2>{text}</h2>zz
         </div>
     )
 }

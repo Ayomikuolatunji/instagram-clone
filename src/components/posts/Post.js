@@ -10,21 +10,25 @@ import Comment from "../comments/Comment";
 
 
 const db = getFirestore();
+
 export default function Post({username,caption, imageUrl,id}){
-    const [comments,setcomments]=React.useState(false);
-    // const [more,setmore]=React.useState(false)
+    const [comments,setcomments]=React.useState([]);
+    const [more,setmore]=React.useState(1)
     const  [comment,setcomment]=React.useState("");
     const {postsData}=React.useContext(FireBaseApi);
-     
-    // get all comment using posts id
-    const fetchComments=async()=>{
-      const query =collection(db,"posts",id,"comments")
-      const res=await getDocs(query)
-      setcomments(res.docs.map(doc=>doc.data()))
-     }
+ 
+      // get all comment using posts id
+      const fetchComments=async(postid)=>{
+        const query =collection(db,"posts",postid,"comments")
+        const res=await getDocs(query)
+        setcomments(res.docs.map(doc=>doc.data()))
+      }
+   
      useEffect(()=>{
-       fetchComments()
-     });
+       fetchComments(id)
+     },[id]);
+
+
      const postComments=async(e)=>{
       if(!comment){
         console.log("error")
@@ -37,14 +41,17 @@ export default function Post({username,caption, imageUrl,id}){
         });
         if(docRef.id){
           postsData()
-          fetchComments()
+          fetchComments(id)
+          setcomment("")
         }
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
       }
      }
-    // console.log(comments.length>1 && comments.slice(0,1))
+  
+  
+
     return(
         <div  className="posts">
              {/* header avatar--->*/}
@@ -63,12 +70,16 @@ export default function Post({username,caption, imageUrl,id}){
                <img src={imageUrl}  alt="image_tag" className="post_img"/>
             {/* userame + caption */}
             <h4 className="post_text"><strong>{username}</strong>{caption}</h4>
-            <div className="border-2">
-              {comments ? comments.map((comment,index)=>{
+            <div>
+              {comments.length>0 ? comments.slice(0,more).reverse().map((comment,index)=>{
                 return <div key={index}>
                     <Comments {...comment} imageUrl={imageUrl}/>
                 </div>
               }):null}
+            </div>
+            <div className="flex justify-between p-4">
+            <h3 onClick={()=>setmore(more+2)} className={`${(comments.length)-( comments.slice(0,more).length)===0?"hidden":"cursor-pointer"}`}>view all {(comments.length)-( comments.slice(0,more).length)} comments</h3>
+            <h3 onClick={()=>setmore(more-2)} className={`${(comments.length)-( comments.slice(0,more).length)===0?"hidden":"cursor-pointer"}`}>hide comments</h3>
             </div>
             <Comment setcomment={setcomment} postComments={postComments} comment={comment}/>
         </div>

@@ -16,7 +16,6 @@ export default function App() {
     <Header/>
     {/* Posts components */}
     <Posts/>
-    
    </div>
   )
 

@@ -17,6 +17,5 @@ export default function Posts() {
       <div>
         < Rightpost/>
      </div>
-
   </div>;
 }

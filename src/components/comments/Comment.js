@@ -6,7 +6,7 @@ import {GrEmoji} from "react-icons/all"
 export default function Comment({setcomment,comment,postComments}){
 
     return(
-        <div className="w-full flex items-center p-3">
+        <div className="w-full flex items-center p-3 border-t-2">
              <div>
                  <GrEmoji className="text-3xl"/>
              </div>
