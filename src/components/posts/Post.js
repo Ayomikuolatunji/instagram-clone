@@ -70,16 +70,15 @@ export default function Post({username,caption, imageUrl,id}){
                <img src={imageUrl}  alt="image_tag" className="post_img"/>
             {/* userame + caption */}
             <h4 className="post_text"><strong>{username}</strong>{caption}</h4>
-            <div>
+            <div className="px-5">
               {comments.length>0 ? comments.slice(0,more).reverse().map((comment,index)=>{
                 return <div key={index}>
                     <Comments {...comment} imageUrl={imageUrl}/>
                 </div>
               }):null}
+              <div className="flex justify-between p-4">
+                <h5 onClick={()=>setmore(more+2)} className={`${(comments.length)-( comments.slice(0,more).length)===0?"hidden":"cursor-pointer"}`}>view all {(comments.length)-(comments.slice(0,more).length)} comments</h5>
             </div>
-            <div className="flex justify-between p-4">
-            <h3 onClick={()=>setmore(more+2)} className={`${(comments.length)-( comments.slice(0,more).length)===0?"hidden":"cursor-pointer"}`}>view all {(comments.length)-( comments.slice(0,more).length)} comments</h3>
-            <h3 onClick={()=>setmore(more-2)} className={`${(comments.length)-( comments.slice(0,more).length)===0?"hidden":"cursor-pointer"}`}>hide comments</h3>
             </div>
             <Comment setcomment={setcomment} postComments={postComments} comment={comment}/>
         </div>
